@@ -9,26 +9,18 @@
     <title>Document</title>
 </head>
 <body>
-<div id="history"></div>
-<form id="chat">
-    <input type="text" id="msg_text" name="msg_text"/>
-    <input type="submit" value="Send!"/>
-</form>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-<script type="text/javascript">
-    var socket = io.connect();
-    $("form#chat").submit(function (e) {
-        e.preventDefault();
+<div id="app">
+    <div id="history">
+        <p v-for="historyMessage in historyMessages">{{ historyMessage }}</p>
+    </div>
+    <form id="chat" v-on:submit.prevent="onSubmit">
+        <input type="text" id="js-message" name="message" v-model="message"/>
+        <input type="submit" value="Send!"/>
+    </form>
+</div>
 
-        socket.emit("send message", $(this).find("#msg_text").val(), function () {
-            $("form#chat #msg_text").val("");
-        });
-    });
-    socket.on("update messages", function (msg) {
-        var final_message = $("<p />").text(msg);
-        $("#history").append(final_message);
-    });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
 </body>
 </html>

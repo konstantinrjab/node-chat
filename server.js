@@ -12,7 +12,7 @@ function response(req, res) {
             if (req.url === '/') {
                 file = __dirname + '/html/index.html';
             } else {
-                file = __dirname + req.url;
+                file = __dirname + '/public' + req.url;
             }
             fs.readFile(file, function(err, data) {
                 if (err) {
