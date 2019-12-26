@@ -1,14 +1,46 @@
-const http = require('http');
+const app = require('http').createServer(response);
+const fs = require('fs');
+const io = require('socket.io')(app);
 
-const hostname = '0.0.0.0';
-const port = 8080;
+app.listen(8080);
+console.log("App running…");
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World\n');
+function response(req, res) {
+    fs.readFile(__dirname + '/html/index.html',
+        function (err, data) {
+            let file = '';
+            if (req.url === '/') {
+                file = __dirname + '/html/index.html';
+            } else {
+                file = __dirname + req.url;
+            }
+            fs.readFile(file, function(err, data) {
+                if (err) {
+                    res.writeHead(404);
+                    return res.end('Page or file not found');
+                }
+                res.writeHead(200);
+                res.end(data);
+            });
+        });
+}
+
+io.on("connection", function(socket) {
+    socket.on("send message", function(sentMessage, callback) {
+        sentMessage = "[ " + getCurrentDate() + " ]: " + sentMessage;
+        io.sockets.emit("update messages", sentMessage);
+        callback();
+    });
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+function getCurrentDate() {
+    var currentDate = new Date();
+    var day = (currentDate.getDate() < 10 ? '0' : '') + currentDate.getDate();
+    var month = ((currentDate.getMonth() + 1) < 10 ? '0' : '') + (currentDate.getMonth() + 1);
+    var year = currentDate.getFullYear();
+    var hour = (currentDate.getHours() < 10 ? '0' : '') + currentDate.getHours();
+    var minute = (currentDate.getMinutes() < 10 ? '0' : '') + currentDate.getMinutes();
+    var second = (currentDate.getSeconds() < 10 ? '0' : '') + currentDate.getSeconds();
+
+    return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+}
