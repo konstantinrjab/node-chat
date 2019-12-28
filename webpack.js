@@ -7,6 +7,7 @@ module.exports = {
     entry: [
         './resources/app.js'
     ],
+    watch: true,
     module: {
         rules: [
             {
@@ -18,9 +19,6 @@ module.exports = {
     output: {
         path: __dirname + "/public/assets/js",
         filename: "main.js"
-    },
-    node: {
-        fs: 'empty'
     },
     devtool: 'source-map',
     plugins: [
