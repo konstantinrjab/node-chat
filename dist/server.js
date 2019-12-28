@@ -90,9 +90,12 @@
 /*!*****************************!*\
   !*** ./app/Classes/Chat.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Chat; });
 class Chat {
     constructor(io) {
         this.io = io;
@@ -124,8 +127,6 @@ function getCurrentDate() {
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 }
 
-module.exports.Chat = Chat;
-
 
 /***/ }),
 
@@ -133,24 +134,33 @@ module.exports.Chat = Chat;
 /*!*********************!*\
   !*** ./app/main.js ***!
   \*********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(__dirname) {const app = __webpack_require__(/*! http */ "http").createServer(response);
-const fs = __webpack_require__(/*! fs */ "fs");
-const io = __webpack_require__(/*! socket.io */ "socket.io")(app);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Classes_Chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Classes/Chat */ "./app/Classes/Chat.js");
+/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! http */ "http");
+/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(http__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var socket_io__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! socket.io */ "socket.io");
+/* harmony import */ var socket_io__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(socket_io__WEBPACK_IMPORTED_MODULE_3__);
 
-// TODO: find better way to include class
-let chatFile = __webpack_require__(/*! ../app/Classes/Chat */ "./app/Classes/Chat.js");
 
-let chat = new chatFile.Chat(io);
-chat.listen();
+
+
+
+const app = http__WEBPACK_IMPORTED_MODULE_2___default.a.createServer(response);
+const io = socket_io__WEBPACK_IMPORTED_MODULE_3___default()(app);
 
 app.listen(8080);
-console.log("App running…");
+
+let chat = new _Classes_Chat__WEBPACK_IMPORTED_MODULE_1__["default"](io);
+chat.listen();
 
 function response(req, res) {
-    fs.readFile(__dirname + '/../public/html/index.html',
+    fs__WEBPACK_IMPORTED_MODULE_0___default.a.readFile('public/html/index.html',
         function (err, data) {
             let file = '';
             if (req.url === '/') {
@@ -158,7 +168,7 @@ function response(req, res) {
             } else {
                 file = 'public' + req.url;
             }
-            fs.readFile(file, function(err, data) {
+            fs__WEBPACK_IMPORTED_MODULE_0___default.a.readFile(file, function(err, data) {
                 if (err) {
                     res.writeHead(404);
                     return res.end('Page or file not found');
@@ -169,7 +179,6 @@ function response(req, res) {
         });
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, "/"))
 
 /***/ }),
 

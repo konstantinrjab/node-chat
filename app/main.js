@@ -1,18 +1,18 @@
-const app = require('http').createServer(response);
-const fs = require('fs');
-const io = require('socket.io')(app);
+import fs from 'fs'
+import Chat from './Classes/Chat'
+import http from 'http'
+import socket from 'socket.io'
 
-// TODO: find better way to include class
-let chatFile = require('../app/Classes/Chat');
-
-let chat = new chatFile.Chat(io);
-chat.listen();
+const app = http.createServer(response);
+const io = socket(app);
 
 app.listen(8080);
-console.log("App running…");
+
+let chat = new Chat(io);
+chat.listen();
 
 function response(req, res) {
-    fs.readFile(__dirname + '/../public/html/index.html',
+    fs.readFile('public/html/index.html',
         function (err, data) {
             let file = '';
             if (req.url === '/') {

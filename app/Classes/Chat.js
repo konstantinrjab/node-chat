@@ -1,4 +1,4 @@
-class Chat {
+export default class Chat {
     constructor(io) {
         this.io = io;
     }
@@ -28,5 +28,3 @@ function getCurrentDate() {
 
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 }
-
-module.exports.Chat = Chat;

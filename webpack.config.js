@@ -1,32 +1,7 @@
 'use strict';
 
 const {VueLoaderPlugin} = require('vue-loader');
-var nodeExternals = require('webpack-node-externals');
-
-// module.exports = {
-//     mode: 'development',
-//     entry: [
-//         './resources/app.js',
-//         './app/main.js'
-//     ],
-//     watch: true,
-//     module: {
-//         rules: [
-//             {
-//                 test: /\.vue$/,
-//                 use: 'vue-loader'
-//             }
-//         ]
-//     },
-//     output: {
-//         path: __dirname + "/public/assets/js",
-//         filename: "main.js"
-//     },
-//     devtool: 'source-map',
-//     plugins: [
-//         new VueLoaderPlugin()
-//     ]
-// };
+let nodeExternals = require('webpack-node-externals');
 
 const common = {
     module: {
