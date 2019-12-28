@@ -19,29 +19,14 @@
                 historyMessages: [],
             };
         },
-        mounted() {
-            // this.socket = io.connect();
-            //
-            // this.socket.on("update messages", function (message) {
-            //     app.updateHistory(message);
-            // });
-        },
         sockets: {
-            connect() {
-                // Fired when the socket connects.
-                this.isConnected = true;
+            updateMessages(data) {
+                this.updateHistory(data);
             },
-            disconnect() {
-                this.isConnected = false;
-            },
-            // Fired when the server sends something on the "messageChannel" channel.
-            messageChannel(data) {
-                this.socketMessage = data
-            }
         },
         methods: {
             onSubmit: function () {
-                this.socket.emit("send message", this.message);
+                this.$socket.emit("sendMessage", this.message);
                 this.message = '';
             },
             updateHistory: function (message) {
