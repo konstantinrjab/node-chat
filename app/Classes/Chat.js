@@ -5,9 +5,9 @@ class Chat {
 
     listen() {
         this.io.on("connection", (socket) => {
-            socket.on("send message", (sentMessage) => {
+            socket.on("sendMessage", (sentMessage) => {
                 sentMessage = formatMessage(sentMessage);
-                this.io.sockets.emit("update messages", sentMessage);
+                this.io.sockets.emit("updateMessages", sentMessage);
             });
         });
     }

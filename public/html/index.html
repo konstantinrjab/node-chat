@@ -9,18 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-<div id="app">
-    <div id="history">
-        <p v-for="historyMessage in historyMessages">{{ historyMessage }}</p>
-    </div>
-    <form id="chat" v-on:submit.prevent="onSubmit">
-        <input type="text" v-model="message"/>
-        <input type="submit" value="Send!"/>
-    </form>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="/assets/js/app.js"></script>
+<div id="app"></div>
+
+<script type="text/javascript" src="/assets/js/main.js"></script>
 </body>
 </html>
