@@ -3,7 +3,7 @@ const fs = require('fs');
 const io = require('socket.io')(app);
 
 // TODO: find better way to include class
-let chatFile = require('./Classes/Chat');
+let chatFile = require('../app/Classes/Chat');
 
 let chat = new chatFile.Chat(io);
 chat.listen();
@@ -16,9 +16,9 @@ function response(req, res) {
         function (err, data) {
             let file = '';
             if (req.url === '/') {
-                file = __dirname + '/../public/html/index.html';
+                file = 'public/html/index.html';
             } else {
-                file = __dirname + '/../public' + req.url;
+                file = 'public' + req.url;
             }
             fs.readFile(file, function(err, data) {
                 if (err) {
