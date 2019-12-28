@@ -10,9 +10,8 @@ var app = new Vue({
     },
     methods: {
         onSubmit: function () {
-            socket.emit("send message", this.message, function () {
-                app.message = '';
-            });
+            socket.emit("send message", this.message);
+            this.message = '';
         },
         updateHistory: function (message) {
             this.historyMessages.push(message);

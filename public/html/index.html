@@ -14,7 +14,7 @@
         <p v-for="historyMessage in historyMessages">{{ historyMessage }}</p>
     </div>
     <form id="chat" v-on:submit.prevent="onSubmit">
-        <input type="text" id="js-message" name="message" v-model="message"/>
+        <input type="text" v-model="message"/>
         <input type="submit" value="Send!"/>
     </form>
 </div>
