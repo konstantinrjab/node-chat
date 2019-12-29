@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\nbody {\n    font-family: Georgia, Tahoma, Arial, sans-serif;\n    background: #302F31;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n    font-family: Georgia, Tahoma, Arial, sans-serif;\n    background: #343a40;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -115,7 +115,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\nform[data-v-5e6f09c9] {\n    margin: 15px 0;\n}\nform input[type='text'][data-v-5e6f09c9] {\n    border: 2px solid #eb5424;\n    border-radius: 5px;\n    padding: 5px;\n    width: 75%;\n}\nform input[type='submit'][data-v-5e6f09c9] {\n    background: #eb5424;\n    border: none;\n    border-radius: 5px;\n    color: #FFF;\n    cursor: pointer;\n    font-weight: bold;\n    padding: 7px 5px;\n    width: 19%;\n}\n#history[data-v-5e6f09c9] {\n    background: #FFF;\n    border: 2px solid #eb5424;\n    height: 550px;\n}\n", ""]);
+exports.push([module.i, "\nform input[type='text'][data-v-5e6f09c9] {\n    border: 2px solid #eb5424;\n}\nform input[type='submit'][data-v-5e6f09c9] {\n    background: #eb5424;\n    border: none;\n}\n#history[data-v-5e6f09c9] {\n    height: 550px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -719,6 +719,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Chat",
@@ -786,52 +792,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "chat" }, [
-    _c(
-      "div",
-      { attrs: { id: "history" } },
-      _vm._l(_vm.historyMessages, function(historyMessage) {
-        return _c("p", [_vm._v(_vm._s(historyMessage))])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: { id: "chat" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onSubmit($event)
-          }
-        }
-      },
-      [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.message,
-              expression: "message"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.message },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.message = $event.target.value
-            }
-          }
-        }),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c(
+          "div",
+          {
+            staticClass: "mt-4 bg-light rounded p-3",
+            attrs: { id: "history" }
+          },
+          _vm._l(_vm.historyMessages, function(historyMessage) {
+            return _c("p", [_vm._v(_vm._s(historyMessage))])
+          }),
+          0
+        ),
         _vm._v(" "),
-        _c("input", { attrs: { type: "submit", value: "Send!" } })
-      ]
-    )
+        _c(
+          "form",
+          {
+            staticClass: "mt-4",
+            attrs: { id: "chat" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.onSubmit($event)
+              }
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "form-row justify-content-between ml-0 mr-0" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.message,
+                      expression: "message"
+                    }
+                  ],
+                  staticClass: "bg-light rounded col-8 form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.message },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.message = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass:
+                    "rounded col-3 text-white font-weight-bold border-0",
+                  attrs: { type: "submit", value: "Send!" }
+                })
+              ]
+            )
+          ]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

@@ -11,6 +11,6 @@
 <style>
     body {
         font-family: Georgia, Tahoma, Arial, sans-serif;
-        background: #302F31;
+        background: #343a40;
     }
 </style>
