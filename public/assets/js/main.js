@@ -115,7 +115,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\nform input[type='text'][data-v-5e6f09c9] {\n    border: 2px solid #eb5424;\n}\nform input[type='submit'][data-v-5e6f09c9] {\n    background: #eb5424;\n    border: none;\n}\n#history[data-v-5e6f09c9] {\n    height: 550px;\n}\n", ""]);
+exports.push([module.i, "\nform input[type='text'][data-v-5e6f09c9] {\n    border: 2px solid #eb5424;\n}\nform input[type='submit'][data-v-5e6f09c9] {\n    background: #eb5424;\n    border: none;\n}\n#history[data-v-5e6f09c9] {\n    height: 550px;\n}\n.css-containerVideoMe[data-v-5e6f09c9] {\n    position: absolute;\n    right: 5px;\n    top: 15px;\n}\n#videoMe[data-v-5e6f09c9] {\n    width: 150px;\n    height: 90px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -725,6 +725,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Chat",
@@ -733,6 +738,14 @@ __webpack_require__.r(__webpack_exports__);
             message: '',
             historyMessages: [],
         };
+    },
+    mounted() {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(mediaStream => {
+                this.$refs.video.srcObject = mediaStream;
+                this.$refs.video.play()
+            })
+            .catch(error => console.error('getUserMedia() error:', error))
     },
     sockets: {
         updateMessages(data) {
@@ -746,7 +759,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         updateHistory: function (message) {
             this.historyMessages.push(message);
-        }
+        },
     }
 });
 
@@ -792,70 +805,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "div",
-          {
-            staticClass: "mt-4 bg-light rounded p-3",
-            attrs: { id: "history" }
-          },
-          _vm._l(_vm.historyMessages, function(historyMessage) {
-            return _c("p", [_vm._v(_vm._s(historyMessage))])
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "mt-4",
-            attrs: { id: "chat" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.onSubmit($event)
+  return _c("div", {}, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col" }, [
+          _c(
+            "div",
+            {
+              staticClass: "mt-4 bg-light rounded p-3",
+              attrs: { id: "history" }
+            },
+            _vm._l(_vm.historyMessages, function(historyMessage) {
+              return _c("p", [_vm._v(_vm._s(historyMessage))])
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "mt-4",
+              attrs: { id: "chat" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.onSubmit($event)
+                }
               }
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "form-row justify-content-between ml-0 mr-0" },
-              [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.message,
-                      expression: "message"
-                    }
-                  ],
-                  staticClass: "bg-light rounded col-8 form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.message },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "form-row justify-content-between ml-0 mr-0" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.message,
+                        expression: "message"
                       }
-                      _vm.message = $event.target.value
+                    ],
+                    staticClass: "bg-light rounded col-8 form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.message },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.message = $event.target.value
+                      }
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass:
-                    "rounded col-3 text-white font-weight-bold border-0",
-                  attrs: { type: "submit", value: "Send!" }
-                })
-              ]
-            )
-          ]
-        )
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass:
+                      "rounded col-3 text-white font-weight-bold border-0",
+                    attrs: { type: "submit", value: "Send!" }
+                  })
+                ]
+              )
+            ]
+          )
+        ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "css-containerVideoMe" }, [
+      _c("video", { ref: "video", attrs: { id: "videoMe", autoplay: "" } })
     ])
   ])
 }
