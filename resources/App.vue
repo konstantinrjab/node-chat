@@ -1,10 +1,17 @@
 <template>
-    <chat></chat>
+    <div class="">
+        <chat></chat>
+        <web-cam></web-cam>
+    </div>
 </template>
 
 <script>
+    import WebCam from "./components/WebCam.vue";
+    import Chat from "./components/Chat.vue";
+
     export default {
-        name: "App"
+        name: "App",
+        components: {WebCam, Chat}
     }
 </script>
 

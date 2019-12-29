@@ -130,6 +130,32 @@ function getCurrentDate() {
 
 /***/ }),
 
+/***/ "./app/Classes/VideoStream.js":
+/*!************************************!*\
+  !*** ./app/Classes/VideoStream.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VideoStream; });
+class VideoStream {
+    constructor(io) {
+        this.io = io;
+    }
+
+    start() {
+        this.io.on("connection", (socket) => {
+            this.io.on("webcamStream", (sentMessage) => {
+                this.io.sockets.broadcast.emit("updateMessages", sentMessage);
+            });
+        });
+    }
+}
+
+/***/ }),
+
 /***/ "./app/main.js":
 /*!*********************!*\
   !*** ./app/main.js ***!
@@ -142,22 +168,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! fs */ "fs");
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Classes_Chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Classes/Chat */ "./app/Classes/Chat.js");
-/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! http */ "http");
-/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(http__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var socket_io__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! socket.io */ "socket.io");
-/* harmony import */ var socket_io__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(socket_io__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Classes_VideoStream__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Classes/VideoStream */ "./app/Classes/VideoStream.js");
+/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! http */ "http");
+/* harmony import */ var http__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(http__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var socket_io__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! socket.io */ "socket.io");
+/* harmony import */ var socket_io__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(socket_io__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
 
-const app = http__WEBPACK_IMPORTED_MODULE_2___default.a.createServer(response);
-const io = socket_io__WEBPACK_IMPORTED_MODULE_3___default()(app);
+
+const app = http__WEBPACK_IMPORTED_MODULE_3___default.a.createServer(response);
+const io = socket_io__WEBPACK_IMPORTED_MODULE_4___default()(app);
 
 app.listen(8080);
 
 let chat = new _Classes_Chat__WEBPACK_IMPORTED_MODULE_1__["default"](io);
 chat.listen();
+let videoStream = new _Classes_VideoStream__WEBPACK_IMPORTED_MODULE_2__["default"](io);
+videoStream.start();
 
 function response(req, res) {
     fs__WEBPACK_IMPORTED_MODULE_0___default.a.readFile('public/html/index.html',
