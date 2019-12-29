@@ -5,8 +5,8 @@ export default class VideoStream {
 
     start() {
         this.io.on("connection", (socket) => {
-            this.io.on("webcamStream", (sentMessage) => {
-                this.io.sockets.broadcast.emit("updateMessages", sentMessage);
+            socket.on("videoStream", (data) => {
+                this.io.sockets.emit("videoStream", data);
             });
         });
     }

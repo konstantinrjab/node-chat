@@ -133,7 +133,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.css-containerVideoMe[data-v-75fb768c] {\n    position: absolute;\n    right: 5px;\n    top: 15px;\n}\n#videoMe[data-v-75fb768c] {\n    width: 150px;\n    height: 90px;\n}\n", ""]);
+exports.push([module.i, "\n.css-containerVideoMe[data-v-75fb768c] {\n    position: absolute;\n    right: 5px;\n    top: 15px;\n}\n.css-video[data-v-75fb768c] {\n    width: 150px;\n    height: 90px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -797,6 +797,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "WebCam",
@@ -804,7 +805,10 @@ __webpack_require__.r(__webpack_exports__);
         navigator.mediaDevices.getUserMedia({video: true})
             .then(mediaStream => {
                 this.$refs.video.srcObject = mediaStream;
-                this.$refs.video.play()
+                this.$refs.video.play();
+
+                this.$refs.canvas.getContext('2d').drawImage(this.$refs.video, 0, 0, 100, 100);
+                this.$socket.emit('videoStream', this.$refs.canvas.toDataURL('image/webp'));
             })
             .catch(error => console.error('getUserMedia() error:', error))
     },
@@ -943,8 +947,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", {}, [
     _c("div", { staticClass: "css-containerVideoMe" }, [
-      _c("video", { ref: "video", attrs: { id: "videoMe", autoplay: "" } })
-    ])
+      _c("video", {
+        ref: "video",
+        staticClass: "css-video",
+        attrs: { autoplay: "" }
+      })
+    ]),
+    _vm._v(" "),
+    _c("canvas", { ref: "canvas" })
   ])
 }
 var staticRenderFns = []
