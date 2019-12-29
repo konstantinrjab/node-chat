@@ -3,17 +3,6 @@
 const {VueLoaderPlugin} = require('vue-loader');
 let nodeExternals = require('webpack-node-externals');
 
-const common = {
-    module: {
-        loaders: [ /* common loaders */]
-    },
-    plugins: [ /* common plugins */],
-    resolve: {
-        extensions: ['', '.js', '.jsx'] // common extensions
-    }
-    // other plugins, postcss config etc. common for frontend and backend
-};
-
 const frontend = {
     mode: 'development',
     entry: [
@@ -24,7 +13,16 @@ const frontend = {
         rules: [
             {
                 test: /\.vue$/,
-                use: 'vue-loader'
+                use: [
+                    'vue-loader',
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },

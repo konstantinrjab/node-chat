@@ -8,6 +8,9 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+    body {
+        font-family: Georgia, Tahoma, Arial, sans-serif;
+        background: #302F31;
+    }
 </style>
